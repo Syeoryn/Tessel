@@ -29,9 +29,10 @@ nrf.on('ready', function () {
     tx.on('ready', function () {
       var n = 0;
       setInterval(function () {
-        var b = new Buffer(4); // set buff len of 8 for compat with maniac bug's RF24 lib
+        var b = new Buffer(32); // set buff len of 8 for compat with maniac bug's RF24 lib
         b.fill(0);
-        b.writeUInt32BE(n++);
+        json = JSON.stringify({color: 'red', machine: 'tessel'});
+        b.write(json);
         console.log("Sending", n);
         tx.write(b);
       }, 5e3); // transmit every 5 seconds
@@ -41,7 +42,7 @@ nrf.on('ready', function () {
     });
   } else {
     console.log("PONG back");
-    var rx = nrf.openPipe('rx', pipes[0], {size: 64});  
+    var rx = nrf.openPipe('rx', pipes[0], {size: 32});  
       tx = nrf.openPipe('tx', pipes[1], {autoAck: false}); 
     rx.on('data', function (d) {
       console.log("Got data, will respond", d.toString());
