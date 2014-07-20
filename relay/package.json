@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "audio-vs1053b": "^0.1.6",
     "relay-mono": "^0.1.2",
-    "rf-nrf24": "^0.8.5"
+    "rf-nrf24": "^0.8.4"
   }
 }
